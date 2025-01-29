@@ -58,3 +58,65 @@ class Meso(Classifier):
         x4 = Conv2D(8, (3,3), padding = 'same', activation = 'relu')(x3)
         x4 = BatchNormalization()(x4)
         x4 = MaxPooling2D(pool_size=(2,2), padding = 'same')(x4)
+
+        y = Flatten()(x4)
+        y = Dropout(0.5)(y)
+        y = Dense(16)(y)
+        y = LeakyReLU(alpha = 0.1)(y)
+        y = Dropout(0.5)(y)
+        y = Dense(1, activation="sigmoid")(y)
+
+        return Model(input = x, output = y)
+
+#Instantiate a MesoNet model with pretrained weights
+meso = Meso4()
+meso.load('./weights/Meso_DF')
+
+#Prepae image data
+
+#Rescaling pixel values (between 1 and 255) to a range between 0 and 1
+Data_Generator = ImageDataGenerator(rescale = 1./255)
+
+#Instantiating generator to feed images through the network
+Generator = Data_Generator.flow_from_directory(
+    './data/',
+    target_size = (256, 256),
+    batch_size = 1, 
+    class_mode = 'binary')
+
+#Check class assignment
+Generator.class_indices
+
+#Removing potential autosave file, should this be run in a jupyter notebook
+!rmdir /s /q c:data\.ipynb_checkpoints
+
+#Rendering image X with label y for MesoNet
+X, y = Generator.next()
+
+#Evaluating prediction
+print(f"Predict likelihood: {meso.predict(X)[0][0]:.4f}")
+print(f"Actual label: {int(y[0])}")
+print(f"\nCorrect prediction: {round(meso.predict(X)[0][0]==y[0]}")
+
+#Display the image we're testing
+plt.imshow(np.squeeze(X));
+
+#Creating seperate lists for correctly classified and missclassified images
+
+#Correct lists
+#Real images
+Correct_Real = []
+Correct_Real_Prediction = []
+
+#Deepfaked images
+Correct_Deepfake = []
+Correct_Deepfake_Predictions = []
+
+#Incorrect lists
+#Real images
+Misclassified_Real = []
+Misclassified_Real_Prediction = []
+
+#Deepfaked images
+Misclassified_Deepfake = []
+Misclassified_Deepfake_Prediction = []
