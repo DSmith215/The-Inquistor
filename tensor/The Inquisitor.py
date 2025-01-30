@@ -58,3 +58,34 @@ class Meso(Classifier):
         x4 = Conv2D(8, (3,3), padding = 'same', activation = 'relu')(x3)
         x4 = BatchNormalization()(x4)
         x4 = MaxPooling2D(pool_size=(2,2), padding = 'same')(x4)
+
+        y = Flatten()(x4)
+        y = Dropout(0.5)(y)
+        y = Dense(16)(y)
+        y = LeakyReLU(alpha = 0.1)(y)
+        y = Dropout(0.5)(y)
+        y = Dense(1, activaton = "sigmoid")(y)
+
+        return Model(inputs = x, outputs = y)
+
+#Instantiate a MesoNet model with pretrained weights
+meso = Meso4()
+meso.load('./weights/Meso4_DF')
+
+#Prepare the image we're classifing
+
+#Rescaling pixel values (between 1 and 255) to a range between 0 and 1
+Data_Generator = Image_Data_Generator(rescale = 1.0/255)
+
+#Instantiate the generator to feed the network the images we're trying to classify
+Generator = Data_Generator.flow_from_directory(
+    './data/',
+    target_size = (256,256),
+    batch_size = 1,
+    class_mode = 'binary')
+
+#Check the class assignments
+Generator.class_indices
+
+#Remove hidden files from Jupyter files
+!rmdir /s /q c:data\.ipynb_checkpoints
