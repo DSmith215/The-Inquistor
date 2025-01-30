@@ -2,11 +2,11 @@
 
   "manifest_version": 3,
 
-  "name": "The Inquister",
+  "name": "The Inquisitor",
 
   "version": "1.0",
 
-  "description": "Popup extension for detecting political deepfakes",
+  "description": "Popup extension for detecting political deepfakes.",
 
   "action": {
 
