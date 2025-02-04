@@ -158,3 +158,8 @@ predict_image(model.model, 'test_data/fake/sample.jpg')
 ![png](tensor/inquisitor_files/inquisitor_3_3.png)
     
 
+# Chrome extension development
+
+We developed a Chrome extension that integrates with our AI system via an API to provide confidence levels for various tasks. The extension collects data from the browser and passes it to the AI, which processes the information and returns a confidence score indicating how likely the AI is to make an accurate prediction or decision. This setup allows for real-time feedback and helps users assess the reliability of the AI’s responses, making the system more transparent and user-friendly.
+
+![image](https://github.com/user-attachments/assets/55b27f62-4829-403d-ab95-4c4a20e65d4e)
