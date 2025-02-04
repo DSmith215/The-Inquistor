@@ -5,8 +5,6 @@ This notebook implements a Convolutional Neural Network (CNN) based on the MesoN
 
 ```python
 # Import packages
-import warnings
-warnings.filterwarnings("ignore", category=FutureWarning,tensorflow)
 import numpy as np
 import matplotlib.pyplot as plt
 import os
