@@ -102,12 +102,7 @@ model.fit(train_images, train_labels, epochs=10, batch_size=32)
 print("Model training complete.")
 ```
 
-    WARNING:tensorflow:From C:\Users\remys\anaconda3\envs\inquisitor\lib\site-packages\tensorflow\python\ops\init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
-    Instructions for updating:
-    Call initializer instance with the dtype argument instead of passing it to the constructor
-    WARNING:tensorflow:From C:\Users\remys\anaconda3\envs\inquisitor\lib\site-packages\tensorflow\python\ops\nn_impl.py:180: add_dispatch_support.<locals>.wrapper (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
-    Instructions for updating:
-    Use tf.where in 2.0, which has the same broadcast rule as np.where
+
     Starting model training...
     Epoch 1/10
     626/626 [==============================] - 44s 70ms/sample - loss: 0.7518 - acc: 0.7093
